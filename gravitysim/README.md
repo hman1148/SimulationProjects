@@ -10,6 +10,7 @@ A real-time 3D gravity simulation built in C++20 with OpenGL, featuring interact
 ## 🌌 Features
 
 ### Core Simulation
+
 - **Real-time gravitational physics** using Newton's law of universal gravitation
 - **N-body simulation** with accurate force calculations between all objects
 - **Collision detection** and response system
@@ -17,12 +18,14 @@ A real-time 3D gravity simulation built in C++20 with OpenGL, featuring interact
 - **Space-time grid visualization** showing gravitational field distortion
 
 ### Advanced Physics
+
 - **Relativistic effects** including Schwarzschild radius calculations
 - **Dynamic mass scaling** during object creation
 - **Realistic density-based radius calculations**
 - **Smooth gravitational force interpolation**
 
 ### Rendering & Graphics
+
 - **Modern OpenGL 3.3+** rendering pipeline
 - **Procedural sphere generation** with configurable detail levels
 - **Dynamic lighting** with surface normal calculations
@@ -31,6 +34,7 @@ A real-time 3D gravity simulation built in C++20 with OpenGL, featuring interact
 - **Free-form 3D camera** with mouse and keyboard controls
 
 ### User Interface
+
 - **Real-time object manipulation** during simulation
 - **Pause/resume functionality** for detailed analysis
 - **Interactive camera system** with smooth movement
@@ -62,6 +66,7 @@ gravitysim/
 ```
 
 ### Design Patterns
+
 - **Component-based architecture** for modularity
 - **RAII principles** for resource management
 - **Modern C++20 features** including concepts and ranges
@@ -73,11 +78,13 @@ gravitysim/
 ### Prerequisites
 
 **System Requirements:**
+
 - C++20 compatible compiler (GCC 10+, Clang 10+, or MSVC 2019+)
 - CMake 3.16 or higher
 - OpenGL 3.3+ compatible graphics card
 
 **Dependencies:**
+
 - **GLFW 3.x** - Window management and input
 - **GLEW 2.x** - OpenGL extension loading
 - **GLM 0.9.9+** - Mathematics library
@@ -86,6 +93,7 @@ gravitysim/
 ### Installation
 
 #### Ubuntu/Debian
+
 ```bash
 # Install dependencies
 sudo apt update
@@ -100,6 +108,7 @@ make -j$(nproc)
 ```
 
 #### Windows (vcpkg)
+
 ```cmd
 # Install dependencies via vcpkg
 vcpkg install glfw3 glew glm
@@ -111,6 +120,7 @@ cmake --build . --config Release
 ```
 
 #### macOS (Homebrew)
+
 ```bash
 # Install dependencies
 brew install cmake glfw glew glm
@@ -122,6 +132,7 @@ make -j$(sysctl -n hw.ncpu)
 ```
 
 ### Running the Simulation
+
 ```bash
 # From build directory
 ./bin/GravitySim
@@ -130,6 +141,7 @@ make -j$(sysctl -n hw.ncpu)
 ## 🎮 Controls
 
 ### Camera Movement
+
 - **W/A/S/D** - Move forward/left/backward/right
 - **Space** - Move up
 - **Shift** - Move down
@@ -137,6 +149,7 @@ make -j$(sysctl -n hw.ncpu)
 - **Scroll Wheel** - Zoom in/out
 
 ### Simulation Controls
+
 - **Left Click** - Create new celestial object
 - **Right Click + Hold** - Increase object mass during creation
 - **Arrow Keys** - Position object during creation (with Shift for Z-axis)
@@ -144,6 +157,7 @@ make -j$(sysctl -n hw.ncpu)
 - **Q** - Quit application
 
 ### Object Creation Workflow
+
 1. **Left click** to start creating an object
 2. Use **arrow keys** to position it
 3. **Right click and hold** to increase mass
@@ -152,6 +166,7 @@ make -j$(sysctl -n hw.ncpu)
 ## 🔬 Physics Model
 
 ### Gravitational Forces
+
 The simulation implements Newton's law of universal gravitation:
 
 ```
@@ -159,17 +174,21 @@ F = G * (m1 * m2) / r²
 ```
 
 Where:
+
 - `G = 6.6743×10⁻¹¹ m³ kg⁻¹ s⁻²` (gravitational constant)
 - `m1, m2` are the masses of the objects
 - `r` is the distance between their centers
 
 ### Space-Time Visualization
+
 The grid system visualizes gravitational field strength using:
+
 - **Grid deformation** based on mass distribution
 - **Schwarzschild radius** calculations for extreme mass objects
 - **Center of mass** tracking for multi-body systems
 
 ### Object Properties
+
 - **Mass**: Determines gravitational influence
 - **Density**: Affects object radius (ρ = 3344 kg/m³ default)
 - **Radius**: Calculated from mass and density
@@ -178,6 +197,7 @@ The grid system visualizes gravitational field strength using:
 ## 🛠️ Configuration
 
 ### Physics Constants
+
 ```cpp
 const double G = 6.6743e-11;     // Gravitational constant
 const float c = 299792458.0;      // Speed of light
@@ -186,6 +206,7 @@ float sizeRatio = 30000.0f;       // Scale factor for visualization
 ```
 
 ### Rendering Settings
+
 - **Sphere detail**: 10×10 segments (configurable)
 - **Grid resolution**: 25×25 divisions
 - **Camera FOV**: 45° (adjustable)
@@ -194,6 +215,7 @@ float sizeRatio = 30000.0f;       // Scale factor for visualization
 ## 🔧 Development
 
 ### Building in Debug Mode
+
 ```bash
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 make
@@ -202,6 +224,7 @@ gdb ./bin/GravitySim
 ```
 
 ### Adding New Features
+
 The modular architecture makes it easy to extend:
 
 1. **New object types**: Inherit from `CelestialObject`
@@ -210,6 +233,7 @@ The modular architecture makes it easy to extend:
 4. **Input modes**: Implement new handlers in `InputManager`
 
 ### Performance Optimization
+
 - Use **Release builds** for production (`-DCMAKE_BUILD_TYPE=Release`)
 - Adjust **sphere detail levels** based on performance needs
 - Modify **update frequencies** for large-scale simulations
@@ -217,23 +241,25 @@ The modular architecture makes it easy to extend:
 ## 📊 Examples
 
 ### Earth-Moon System
+
 ```cpp
 // Create Earth (scaled down)
-Object earth(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0), 
+Object earth(glm::vec3(0, 0, 0), glm::vec3(0, 0, 0),
             5.97219e24, 5515, glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
 
 // Create Moon
-Object moon(glm::vec3(3844, 0, 0), glm::vec3(0, 0, 228), 
+Object moon(glm::vec3(3844, 0, 0), glm::vec3(0, 0, 228),
            7.34767309e22, 3344);
 ```
 
 ### Binary Star System
+
 ```cpp
 // Two massive objects orbiting each other
-Object star1(glm::vec3(-5000, 0, 0), glm::vec3(0, 0, 1500), 
+Object star1(glm::vec3(-5000, 0, 0), glm::vec3(0, 0, 1500),
             1.989e25, 5515, glm::vec4(1.0f, 0.929f, 0.176f, 1.0f), true);
-            
-Object star2(glm::vec3(5000, 0, 0), glm::vec3(0, 0, -1500), 
+
+Object star2(glm::vec3(5000, 0, 0), glm::vec3(0, 0, -1500),
             1.989e25, 5515, glm::vec4(0.8f, 0.2f, 0.9f, 1.0f), true);
 ```
 
@@ -242,6 +268,7 @@ Object star2(glm::vec3(5000, 0, 0), glm::vec3(0, 0, -1500),
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ### Areas for Contribution
+
 - **Performance optimization** for large-scale simulations
 - **Additional physics models** (electromagnetic forces, relativistic effects)
 - **Enhanced visualization** (particle trails, heat maps, velocity vectors)

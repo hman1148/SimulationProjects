@@ -22,7 +22,7 @@ namespace models::entities
          * Draw the entity
          * shaderProgram: OpenGL shader program ID
          */
-        virtual void Draw(GLuint shaderProgram) = 0;
+        virtual void Draw(GLuint &shaderProgram) = 0;
 
         glm::vec3 m_position{0.0f};
         glm::vec3 m_velocity{0.0f};
@@ -54,5 +54,13 @@ namespace models::entities
 
             glBindVertexArray(0);
         }
-    };
-};
+
+        constexpr glm::vec3 sphericalToCartesian(float r, float theta, float phi)
+        {
+            return glm::vec3(
+                r * sin(theta) * cos(phi),
+                r * cos(theta),
+                r * sin(theta) * sin(phi));
+        }
+    }
+}
